@@ -86,7 +86,11 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 - (void)onSelectButtonClicked:(UIButton *)sender
 {
     // 1.判断相册是否可以打开
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) return;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [MCMessage showErrorWithTitle:@"无法打开相册"];
+
+        return;
+    }
     // 2. 创建图片选择控制器
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     
@@ -115,6 +119,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
         
         ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
         if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied){
+            [MCMessage showErrorWithTitle:@"拍摄失败，请检查相册权限"];
             //无权限
             return ;
         }
