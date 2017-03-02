@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		9917EBA31E6832700047618B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBA21E6832700047618B /* main.m */; };
 		9917EBA61E6832700047618B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBA51E6832700047618B /* AppDelegate.m */; };
-		9917EBA91E6832700047618B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBA81E6832700047618B /* ViewController.m */; };
 		9917EBAC1E6832710047618B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAA1E6832710047618B /* Main.storyboard */; };
 		9917EBAE1E6832710047618B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAD1E6832710047618B /* Assets.xcassets */; };
 		9917EBB11E6832710047618B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAF1E6832710047618B /* LaunchScreen.storyboard */; };
 		9917EBBC1E6832710047618B /* MagicCameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBBB1E6832710047618B /* MagicCameraTests.m */; };
 		9917EBC71E6832710047618B /* MagicCameraUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBC61E6832710047618B /* MagicCameraUITests.m */; };
+		9917EBD61E68344D0047618B /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBD51E68344D0047618B /* MCMainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +39,6 @@
 		9917EBA21E6832700047618B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9917EBA41E6832700047618B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9917EBA51E6832700047618B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9917EBA71E6832700047618B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9917EBA81E6832700047618B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9917EBAB1E6832710047618B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9917EBAD1E6832710047618B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9917EBB01E6832710047618B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +49,8 @@
 		9917EBC21E6832710047618B /* MagicCameraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagicCameraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9917EBC61E6832710047618B /* MagicCameraUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagicCameraUITests.m; sourceTree = "<group>"; };
 		9917EBC81E6832710047618B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9917EBD41E68344D0047618B /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMainViewController.h; sourceTree = "<group>"; };
+		9917EBD51E68344D0047618B /* MCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +103,8 @@
 			children = (
 				9917EBA41E6832700047618B /* AppDelegate.h */,
 				9917EBA51E6832700047618B /* AppDelegate.m */,
-				9917EBA71E6832700047618B /* ViewController.h */,
-				9917EBA81E6832700047618B /* ViewController.m */,
+				9917EBD41E68344D0047618B /* MCMainViewController.h */,
+				9917EBD51E68344D0047618B /* MCMainViewController.m */,
 				9917EBAA1E6832710047618B /* Main.storyboard */,
 				9917EBAD1E6832710047618B /* Assets.xcassets */,
 				9917EBAF1E6832710047618B /* LaunchScreen.storyboard */,
@@ -202,6 +202,7 @@
 		9917EB961E6832700047618B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MC;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = zzqiltw;
 				TargetAttributes = {
@@ -274,7 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9917EBA91E6832700047618B /* ViewController.m in Sources */,
+				9917EBD61E68344D0047618B /* MCMainViewController.m in Sources */,
 				9917EBA61E6832700047618B /* AppDelegate.m in Sources */,
 				9917EBA31E6832700047618B /* main.m in Sources */,
 			);
@@ -510,6 +511,7 @@
 				9917EBCD1E6832710047618B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9917EBCE1E6832710047618B /* Build configuration list for PBXNativeTarget "MagicCameraTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +520,7 @@
 				9917EBD01E6832710047618B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9917EBD11E6832710047618B /* Build configuration list for PBXNativeTarget "MagicCameraUITests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +529,7 @@
 				9917EBD31E6832710047618B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

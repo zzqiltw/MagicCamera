@@ -24,6 +24,14 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+
+    <key>NSCameraUsageDescription</key>
+    <string>请Lizzle同意访问相册</string>
+    
+    
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>请Lizzle同意访问相册</string>
+    
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

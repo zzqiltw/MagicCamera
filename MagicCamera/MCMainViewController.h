@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MCMainViewController.h
 //  MagicCamera
 //
 //  Created by 郑志勤 on 2017/3/2.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MCMainViewController : UIViewController
 
 @end
-
