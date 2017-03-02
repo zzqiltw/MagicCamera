@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Baobaotuan. All rights reserved.
 //
 
-#import "ActionButton.h"
+#import "MCActionButton.h"
 #import <POP/POP.h>
-
-@implementation ActionButton
+#import "MCDefine.h"
+@implementation MCActionButton
 
 - (void)setup
 {
@@ -35,7 +35,6 @@
 {
     CGRect bounds = CGRectInset(self.bounds, 1, 1);
     CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSetFillColorWithColor(context, ZQColor(74, 160, 160, 0.3).CGColor);
     [[UIColor whiteColor] setFill];
     CGContextSetStrokeColorWithColor(context, ZQColor(168, 238, 254, 1.0).CGColor);
     CGContextSetLineWidth(context, 2);

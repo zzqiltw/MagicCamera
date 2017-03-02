@@ -9,17 +9,15 @@
 #import "MCMainViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "ActionButton.h"
-
-#define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kMainScreenHeight  [UIScreen mainScreen].bounds.size.height
-
+#import "MCActionButton.h"
+#import "MCDefine.h"
+#import "MCMessage.h"
 static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKey";
 
 @interface MCMainViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) ActionButton *selectImageButton;
-@property (nonatomic, strong) ActionButton *takePictureButton;
+@property (nonatomic, strong) MCActionButton *selectImageButton;
+@property (nonatomic, strong) MCActionButton *takePictureButton;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
 /**
@@ -122,7 +120,11 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
         }
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
-            
+            if (!error) {
+                [MCMessage showSuccessWithTitle:@"已保存到相册中"];
+            } else {
+                [MCMessage showErrorWithTitle:@"保存失败"];
+            }
         }];
         
     }];
@@ -143,9 +145,6 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     [device unlockForConfiguration];
     
     self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
-    if (error) {
-        NSLog(@"%@",error);
-    }
     self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     //输出设置。AVVideoCodecJPEG   输出jpeg格式图片
     NSDictionary * outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey, nil];
@@ -157,12 +156,6 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     if ([self.session canAddOutput:self.stillImageOutput]) {
         [self.session addOutput:self.stillImageOutput];
     }
-    
-//    //初始化预览图层
-//    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
-//    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
-//    self.previewLayer.frame = CGRectMake(0, 0,kMainScreenWidth, kMainScreenHeight - 64);
-//    [self.view.layer addSublayer:self.previewLayer];
 }
 
 -(AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation
@@ -193,10 +186,10 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 }
 
 #pragma mark - LazyLoad
-- (ActionButton *)selectImageButton
+- (MCActionButton *)selectImageButton
 {
     if (!_selectImageButton) {
-        _selectImageButton = [[ActionButton alloc] init];
+        _selectImageButton = [[MCActionButton alloc] init];
         
         [_selectImageButton setTitle:@"更换背景" forState:UIControlStateNormal];
         _selectImageButton.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -210,10 +203,10 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     return _selectImageButton;
 }
 
-- (ActionButton *)takePictureButton
+- (MCActionButton *)takePictureButton
 {
     if (!_takePictureButton) {
-        _takePictureButton = [[ActionButton alloc] init];
+        _takePictureButton = [[MCActionButton alloc] init];
         
         [_takePictureButton setTitle:@"拍照" forState:UIControlStateNormal];
         _takePictureButton.titleLabel.font = [UIFont systemFontOfSize:15];

@@ -12,11 +12,11 @@
 		9917EBA61E6832700047618B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBA51E6832700047618B /* AppDelegate.m */; };
 		9917EBAC1E6832710047618B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAA1E6832710047618B /* Main.storyboard */; };
 		9917EBAE1E6832710047618B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAD1E6832710047618B /* Assets.xcassets */; };
-		9917EBB11E6832710047618B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAF1E6832710047618B /* LaunchScreen.storyboard */; };
 		9917EBBC1E6832710047618B /* MagicCameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBBB1E6832710047618B /* MagicCameraTests.m */; };
 		9917EBC71E6832710047618B /* MagicCameraUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBC61E6832710047618B /* MagicCameraUITests.m */; };
 		9917EBD61E68344D0047618B /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBD51E68344D0047618B /* MCMainViewController.m */; };
-		9917EBDC1E6840710047618B /* ActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBDB1E6840710047618B /* ActionButton.m */; };
+		9917EBDC1E6840710047618B /* MCActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBDB1E6840710047618B /* MCActionButton.m */; };
+		9917EBE01E684C9E0047618B /* MCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBDF1E684C9E0047618B /* MCMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,6 @@
 		9917EBA51E6832700047618B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9917EBAB1E6832710047618B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9917EBAD1E6832710047618B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9917EBB01E6832710047618B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9917EBB21E6832710047618B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9917EBB71E6832710047618B /* MagicCameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagicCameraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9917EBBB1E6832710047618B /* MagicCameraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MagicCameraTests.m; sourceTree = "<group>"; };
@@ -55,8 +54,11 @@
 		9917EBC81E6832710047618B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9917EBD41E68344D0047618B /* MCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMainViewController.h; sourceTree = "<group>"; };
 		9917EBD51E68344D0047618B /* MCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMainViewController.m; sourceTree = "<group>"; };
-		9917EBDA1E6840710047618B /* ActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionButton.h; sourceTree = "<group>"; };
-		9917EBDB1E6840710047618B /* ActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionButton.m; sourceTree = "<group>"; };
+		9917EBDA1E6840710047618B /* MCActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCActionButton.h; sourceTree = "<group>"; };
+		9917EBDB1E6840710047618B /* MCActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCActionButton.m; sourceTree = "<group>"; };
+		9917EBDD1E684C470047618B /* MCDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCDefine.h; sourceTree = "<group>"; };
+		9917EBDE1E684C9E0047618B /* MCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessage.h; sourceTree = "<group>"; };
+		9917EBDF1E684C9E0047618B /* MCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMessage.m; sourceTree = "<group>"; };
 		E08B587B55C39EF3225A4D6B /* Pods-MagicCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-MagicCamera/Pods-MagicCamera.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,15 +130,11 @@
 		9917EBA01E6832700047618B /* MagicCamera */ = {
 			isa = PBXGroup;
 			children = (
-				9917EBA41E6832700047618B /* AppDelegate.h */,
-				9917EBA51E6832700047618B /* AppDelegate.m */,
-				9917EBD41E68344D0047618B /* MCMainViewController.h */,
-				9917EBD51E68344D0047618B /* MCMainViewController.m */,
-				9917EBDA1E6840710047618B /* ActionButton.h */,
-				9917EBDB1E6840710047618B /* ActionButton.m */,
+				9917EBE31E684E2B0047618B /* Other */,
+				9917EBE21E684E220047618B /* Controller */,
+				9917EBE11E684E1C0047618B /* View */,
 				9917EBAA1E6832710047618B /* Main.storyboard */,
 				9917EBAD1E6832710047618B /* Assets.xcassets */,
-				9917EBAF1E6832710047618B /* LaunchScreen.storyboard */,
 				9917EBB21E6832710047618B /* Info.plist */,
 				9917EBA11E6832700047618B /* Supporting Files */,
 			);
@@ -167,6 +165,36 @@
 				9917EBC81E6832710047618B /* Info.plist */,
 			);
 			path = MagicCameraUITests;
+			sourceTree = "<group>";
+		};
+		9917EBE11E684E1C0047618B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9917EBDA1E6840710047618B /* MCActionButton.h */,
+				9917EBDB1E6840710047618B /* MCActionButton.m */,
+				9917EBDE1E684C9E0047618B /* MCMessage.h */,
+				9917EBDF1E684C9E0047618B /* MCMessage.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9917EBE21E684E220047618B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9917EBD41E68344D0047618B /* MCMainViewController.h */,
+				9917EBD51E68344D0047618B /* MCMainViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9917EBE31E684E2B0047618B /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				9917EBA41E6832700047618B /* AppDelegate.h */,
+				9917EBA51E6832700047618B /* AppDelegate.m */,
+				9917EBDD1E684C470047618B /* MCDefine.h */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,7 +308,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9917EBB11E6832710047618B /* LaunchScreen.storyboard in Resources */,
 				9917EBAE1E6832710047618B /* Assets.xcassets in Resources */,
 				9917EBAC1E6832710047618B /* Main.storyboard in Resources */,
 			);
@@ -355,10 +382,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9917EBE01E684C9E0047618B /* MCMessage.m in Sources */,
 				9917EBD61E68344D0047618B /* MCMainViewController.m in Sources */,
 				9917EBA61E6832700047618B /* AppDelegate.m in Sources */,
 				9917EBA31E6832700047618B /* main.m in Sources */,
-				9917EBDC1E6840710047618B /* ActionButton.m in Sources */,
+				9917EBDC1E6840710047618B /* MCActionButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,14 +428,6 @@
 				9917EBAB1E6832710047618B /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9917EBAF1E6832710047618B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9917EBB01E6832710047618B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

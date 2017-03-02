@@ -1,15 +1,21 @@
 PODS:
+  - HexColors (2.2.1)
   - Masonry (1.0.2)
   - pop (1.0.9)
+  - TSMessages (0.9.12):
+    - HexColors (~> 2.2.0)
 
 DEPENDENCIES:
   - Masonry (~> 1.0)
   - pop (~> 1.0.9)
+  - TSMessages
 
 SPEC CHECKSUMS:
+  HexColors: abfd172e329dab59888614ccba6f216cec59289d
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
 
-PODFILE CHECKSUM: 97ab151215e107eaa43756ed36fa201c47d40152
+PODFILE CHECKSUM: 6ae13ea6fd231ad0432efd2aa8e879ed7663bce2
 
 COCOAPODS: 1.1.1
