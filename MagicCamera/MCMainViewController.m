@@ -91,6 +91,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 
         return;
     }
+    
     // 2. 创建图片选择控制器
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     
