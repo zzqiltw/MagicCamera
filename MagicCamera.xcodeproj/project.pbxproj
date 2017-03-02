@@ -10,7 +10,6 @@
 		693C21B058F8966A90D087D9 /* libPods-MagicCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34735F059D33B6A6B2FDCF26 /* libPods-MagicCamera.a */; };
 		9917EBA31E6832700047618B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBA21E6832700047618B /* main.m */; };
 		9917EBA61E6832700047618B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBA51E6832700047618B /* AppDelegate.m */; };
-		9917EBAC1E6832710047618B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAA1E6832710047618B /* Main.storyboard */; };
 		9917EBAE1E6832710047618B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9917EBAD1E6832710047618B /* Assets.xcassets */; };
 		9917EBBC1E6832710047618B /* MagicCameraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBBB1E6832710047618B /* MagicCameraTests.m */; };
 		9917EBC71E6832710047618B /* MagicCameraUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBC61E6832710047618B /* MagicCameraUITests.m */; };
@@ -43,7 +42,6 @@
 		9917EBA21E6832700047618B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9917EBA41E6832700047618B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9917EBA51E6832700047618B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9917EBAB1E6832710047618B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9917EBAD1E6832710047618B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9917EBB21E6832710047618B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9917EBB71E6832710047618B /* MagicCameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MagicCameraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,7 +131,6 @@
 				9917EBE31E684E2B0047618B /* Other */,
 				9917EBE21E684E220047618B /* Controller */,
 				9917EBE11E684E1C0047618B /* View */,
-				9917EBAA1E6832710047618B /* Main.storyboard */,
 				9917EBAD1E6832710047618B /* Assets.xcassets */,
 				9917EBB21E6832710047618B /* Info.plist */,
 				9917EBA11E6832700047618B /* Supporting Files */,
@@ -309,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9917EBAE1E6832710047618B /* Assets.xcassets in Resources */,
-				9917EBAC1E6832710047618B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,17 +416,6 @@
 			targetProxy = 9917EBC31E6832710047618B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		9917EBAA1E6832710047618B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9917EBAB1E6832710047618B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9917EBC91E6832710047618B /* Debug */ = {
