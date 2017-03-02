@@ -9,13 +9,17 @@
 #import "MCMainViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "ActionButton.h"
 
 #define kMainScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kMainScreenHeight  [UIScreen mainScreen].bounds.size.height
-@interface MCMainViewController ()
 
-@property (nonatomic, strong) UIButton *selectImageButton;
-@property (nonatomic, strong) UIButton *takePictureButton;
+static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKey";
+
+@interface MCMainViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) ActionButton *selectImageButton;
+@property (nonatomic, strong) ActionButton *takePictureButton;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
 /**
@@ -49,12 +53,17 @@
     [self initAVCaptureSession];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     
-    self.selectImageButton.center = CGPointMake(self.view.center.x, self.view.center.y - 50);
-    self.takePictureButton.center = CGPointMake(self.view.center.x, self.view.center.y + 50);
+    self.selectImageButton.frame = (CGRect){CGPointMake(self.view.center.x - 50, self.view.center.y - 100 - 44), {100, 100}};
+    self.takePictureButton.frame = (CGRect){CGPointMake(self.view.center.x - 50, self.view.center.y + 100 - 44), {100, 100}};
     self.backgroundImageView.frame = self.view.bounds;
 }
 
@@ -67,7 +76,6 @@
     }
 }
 
-
 - (void)viewDidDisappear:(BOOL)animated{
     
     [super viewDidDisappear:YES];
@@ -79,7 +87,17 @@
 
 - (void)onSelectButtonClicked:(UIButton *)sender
 {
+    // 1.判断相册是否可以打开
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) return;
+    // 2. 创建图片选择控制器
+    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     
+    // 3. 设置打开照片相册类型(显示所有相簿)
+    ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    // 4.设置代理
+    ipc.delegate = self;
+    // 5.modal出这个控制器
+    [self presentViewController:ipc animated:YES completion:nil];
 }
 
 - (void)onTakePictureButtonClicked:(UIButton *)sender
@@ -121,7 +139,7 @@
     //更改这个设置的时候必须先锁定设备，修改完后再解锁，否则崩溃
     [device lockForConfiguration:nil];
     //设置闪光灯为自动
-    [device setFlashMode:AVCaptureFlashModeAuto];
+    [device setFlashMode:AVCaptureFlashModeOff];
     [device unlockForConfiguration];
     
     self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
@@ -158,14 +176,31 @@
     return result;
 }
 
+#pragma mark -- <UIImagePickerControllerDelegate>--
+// 获取图片后的操作
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    // 销毁控制器
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // 设置图片
+    self.backgroundImageView.image = info[UIImagePickerControllerOriginalImage];
+    
+    // 持久化这个图片
+    NSData *imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1.f);
+    NSString *imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [[NSUserDefaults standardUserDefaults] setObject:imageBase64 forKey:kMCBackgroundImageStoreKey];
+}
 
 #pragma mark - LazyLoad
-- (UIButton *)selectImageButton
+- (ActionButton *)selectImageButton
 {
     if (!_selectImageButton) {
-        _selectImageButton = [[UIButton alloc] init];
+        _selectImageButton = [[ActionButton alloc] init];
         
         [_selectImageButton setTitle:@"更换背景" forState:UIControlStateNormal];
+        _selectImageButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_selectImageButton setTitleColor:ZQColor(61, 186, 188, 1) forState:UIControlStateNormal];
         [_selectImageButton addTarget:self action:@selector(onSelectButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_selectImageButton sizeToFit];
         
@@ -175,12 +210,14 @@
     return _selectImageButton;
 }
 
-- (UIButton *)takePictureButton
+- (ActionButton *)takePictureButton
 {
     if (!_takePictureButton) {
-        _takePictureButton = [[UIButton alloc] init];
+        _takePictureButton = [[ActionButton alloc] init];
         
         [_takePictureButton setTitle:@"拍照" forState:UIControlStateNormal];
+        _takePictureButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_takePictureButton setTitleColor:ZQColor(61, 186, 188, 1) forState:UIControlStateNormal];
         [_takePictureButton addTarget:self action:@selector(onTakePictureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_takePictureButton sizeToFit];
         
@@ -194,7 +231,18 @@
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         
-        _backgroundImageView.image = [UIImage imageNamed:@"6"];
+        UIImage *image = [UIImage imageNamed:@"Background"];
+        
+        NSString *imageBase64 = [[NSUserDefaults standardUserDefaults] objectForKey:kMCBackgroundImageStoreKey];
+        if (imageBase64) {
+            NSData *imageData = [[NSData alloc] initWithBase64EncodedString:imageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            if (imageData) {
+                image = [UIImage imageWithData:imageData];
+            }
+        }
+        
+        _backgroundImageView.image = image;
+        
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         
         [self.view insertSubview:_backgroundImageView atIndex:0];
