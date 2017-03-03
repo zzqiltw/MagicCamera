@@ -9,15 +9,25 @@
 #import "MCMainViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "MCActionButton.h"
+//#import "MCActionButton.h"
 #import "MCDefine.h"
 #import "MCMessage.h"
 static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKey";
 
 @interface MCMainViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) MCActionButton *selectImageButton;
-@property (nonatomic, strong) MCActionButton *takePictureButton;
+//@property (nonatomic, strong) MCActionButton *selectImageButton;
+//@property (nonatomic, strong) MCActionButton *takePictureButton;
+
+/**
+ 上半部分全是
+ */
+@property (nonatomic, strong) UIButton *selectImageButton;
+
+/**
+ 下半部分全是
+ */
+@property (nonatomic, strong) UIButton *takePictureButton;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
 /**
@@ -60,8 +70,10 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 {
     [super viewWillLayoutSubviews];
     
-    self.selectImageButton.frame = (CGRect){CGPointMake(self.view.center.x - 50, self.view.center.y - 100 - 44), {100, 100}};
-    self.takePictureButton.frame = (CGRect){CGPointMake(self.view.center.x - 50, self.view.center.y + 100 - 44), {100, 100}};
+    
+    
+    self.selectImageButton.frame = (CGRect){{0, 0}, {kMainScreenWidth, kMainScreenHeight * 0.5}};
+    self.takePictureButton.frame = (CGRect){{0, CGRectGetMaxY(self.selectImageButton.frame)}, {kMainScreenWidth, self.selectImageButton.frame.size.height}};
     self.backgroundImageView.frame = self.view.bounds;
 }
 
@@ -146,7 +158,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     
     //更改这个设置的时候必须先锁定设备，修改完后再解锁，否则崩溃
     [device lockForConfiguration:nil];
-    //设置闪光灯为自动
+    //设置闪光灯为关闭
     [device setFlashMode:AVCaptureFlashModeOff];
     [device unlockForConfiguration];
     
@@ -192,16 +204,16 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 }
 
 #pragma mark - LazyLoad
-- (MCActionButton *)selectImageButton
+- (UIButton *)selectImageButton
 {
     if (!_selectImageButton) {
-        _selectImageButton = [[MCActionButton alloc] init];
+        _selectImageButton = [[UIButton alloc] init];
         
-        [_selectImageButton setTitle:@"更换背景" forState:UIControlStateNormal];
-        _selectImageButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_selectImageButton setTitleColor:ZQColor(61, 186, 188, 1) forState:UIControlStateNormal];
+//        [_selectImageButton setTitle:@"更换背景" forState:UIControlStateNormal];
+//        _selectImageButton.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [_selectImageButton setTitleColor:ZQColor(61, 186, 188, 1) forState:UIControlStateNormal];
         [_selectImageButton addTarget:self action:@selector(onSelectButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_selectImageButton sizeToFit];
+//        [_selectImageButton sizeToFit];
         
         [self.view addSubview:_selectImageButton];
     }
@@ -209,16 +221,16 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     return _selectImageButton;
 }
 
-- (MCActionButton *)takePictureButton
+- (UIButton *)takePictureButton
 {
     if (!_takePictureButton) {
-        _takePictureButton = [[MCActionButton alloc] init];
+        _takePictureButton = [[UIButton alloc] init];
         
-        [_takePictureButton setTitle:@"拍照" forState:UIControlStateNormal];
-        _takePictureButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_takePictureButton setTitleColor:ZQColor(61, 186, 188, 1) forState:UIControlStateNormal];
+//        [_takePictureButton setTitle:@"拍照" forState:UIControlStateNormal];
+//        _takePictureButton.titleLabel.font = [UIFont systemFontOfSize:15];
+//        [_takePictureButton setTitleColor:ZQColor(61, 186, 188, 1) forState:UIControlStateNormal];
         [_takePictureButton addTarget:self action:@selector(onTakePictureButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_takePictureButton sizeToFit];
+//        [_takePictureButton sizeToFit];
         
         [self.view addSubview:_takePictureButton];
     }

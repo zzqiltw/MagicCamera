@@ -11,10 +11,10 @@
 @implementation MCMessage
 + (void)showSuccessWithTitle:(NSString *)message
 {
-    [TSMessage showNotificationInViewController:[TSMessage defaultViewController] title:message subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.6 canBeDismissedByUser:YES];
+//    [TSMessage showNotificationInViewController:[TSMessage defaultViewController] title:message subtitle:nil type:TSMessageNotificationTypeSuccess duration:0.6 canBeDismissedByUser:YES];
 }
 + (void)showErrorWithTitle:(NSString *)message
 {
-    [TSMessage showNotificationInViewController:[TSMessage defaultViewController] title:message subtitle:nil type:TSMessageNotificationTypeError duration:0.6 canBeDismissedByUser:YES];
+//    [TSMessage showNotificationInViewController:[TSMessage defaultViewController] title:message subtitle:nil type:TSMessageNotificationTypeError duration:0.6 canBeDismissedByUser:YES];
 }
 @end
