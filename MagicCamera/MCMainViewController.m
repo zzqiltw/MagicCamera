@@ -12,6 +12,7 @@
 //#import "MCActionButton.h"
 #import "MCDefine.h"
 #import "MCMessage.h"
+
 static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKey";
 
 @interface MCMainViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -51,6 +52,12 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 
 @implementation MCMainViewController
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -61,20 +68,12 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     [self initAVCaptureSession];
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
-    
-    
-    self.selectImageButton.frame = (CGRect){{0, 0}, {kMainScreenWidth, kMainScreenHeight * 0.5}};
-    self.takePictureButton.frame = (CGRect){{0, CGRectGetMaxY(self.selectImageButton.frame)}, {kMainScreenWidth, self.selectImageButton.frame.size.height}};
-    self.backgroundImageView.frame = self.view.bounds;
+
+    [self layoutUI];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -95,12 +94,12 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     }
 }
 
+#pragma mark - Actions
 - (void)onSelectButtonClicked:(UIButton *)sender
 {
     // 1.判断相册是否可以打开
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         [MCMessage showErrorWithTitle:@"无法打开相册"];
-
         return;
     }
     
@@ -148,6 +147,13 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     }];
 }
 
+- (void)layoutUI
+{
+    self.selectImageButton.frame = (CGRect){{0, 0}, {kMainScreenWidth, kMainScreenHeight * 0.5}};
+    self.takePictureButton.frame = (CGRect){{0, CGRectGetMaxY(self.selectImageButton.frame)}, {kMainScreenWidth, self.selectImageButton.frame.size.height}};
+    self.backgroundImageView.frame = self.view.bounds;
+}
+
 - (void)initAVCaptureSession {
     
     self.session = [[AVCaptureSession alloc] init];
@@ -176,7 +182,27 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     }
 }
 
--(AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation
+- (UIImage *)prefetchImageWithDefaultImage:(UIImage *)image
+{
+    NSString *imageBase64 = [[NSUserDefaults standardUserDefaults] objectForKey:kMCBackgroundImageStoreKey];
+    if (imageBase64) {
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:imageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        if (imageData) {
+            image = [UIImage imageWithData:imageData];
+        }
+    }
+    
+    return image;
+}
+
+- (void)saveImage:(UIImage *)image
+{
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
+    NSString *imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [[NSUserDefaults standardUserDefaults] setObject:imageBase64 forKey:kMCBackgroundImageStoreKey];
+}
+
+- (AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation
 {
     AVCaptureVideoOrientation result = (AVCaptureVideoOrientation)deviceOrientation;
     if ( deviceOrientation == UIDeviceOrientationLandscapeLeft ) {
@@ -187,7 +213,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     return result;
 }
 
-#pragma mark -- <UIImagePickerControllerDelegate>--
+#pragma mark -- <UIImagePickerControllerDelegate>
 // 获取图片后的操作
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
@@ -198,9 +224,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     self.backgroundImageView.image = info[UIImagePickerControllerOriginalImage];
     
     // 持久化这个图片
-    NSData *imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 1.f);
-    NSString *imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [[NSUserDefaults standardUserDefaults] setObject:imageBase64 forKey:kMCBackgroundImageStoreKey];
+    [self saveImage:info[UIImagePickerControllerOriginalImage]];
 }
 
 #pragma mark - LazyLoad
@@ -242,15 +266,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         
-        UIImage *image = [UIImage imageNamed:@"Background"];
-        
-        NSString *imageBase64 = [[NSUserDefaults standardUserDefaults] objectForKey:kMCBackgroundImageStoreKey];
-        if (imageBase64) {
-            NSData *imageData = [[NSData alloc] initWithBase64EncodedString:imageBase64 options:NSDataBase64DecodingIgnoreUnknownCharacters];
-            if (imageData) {
-                image = [UIImage imageWithData:imageData];
-            }
-        }
+        UIImage *image = [self prefetchImageWithDefaultImage:[UIImage imageNamed:@"Background"]];
         
         _backgroundImageView.image = image;
         
@@ -260,5 +276,7 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     }
     return _backgroundImageView;
 }
+
+
 
 @end
