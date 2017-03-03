@@ -61,9 +61,9 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     [self initAVCaptureSession];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
+- (BOOL)prefersStatusBarHidden
 {
-    return UIStatusBarStyleLightContent;
+    return YES;
 }
 
 - (void)viewWillLayoutSubviews
