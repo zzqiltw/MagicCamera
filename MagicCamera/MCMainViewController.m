@@ -12,6 +12,7 @@
 //#import "MCActionButton.h"
 #import "MCDefine.h"
 #import "MCMessage.h"
+#import "UIImage+MC.h"
 
 static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKey";
 
@@ -96,6 +97,32 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 
 #pragma mark - Actions
 - (void)onSelectButtonClicked:(UIButton *)sender
+{
+    UIAlertAction *blackColorAction = [UIAlertAction actionWithTitle:@"纯黑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.backgroundImageView.image = [UIImage new];
+        self.backgroundImageView.backgroundColor = [UIColor blackColor];
+    }];
+    
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self selectPhoto];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"选择" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:blackColorAction];
+    [alertController addAction:photoAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+    
+}
+
+- (void)selectPhoto
 {
     // 1.判断相册是否可以打开
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {

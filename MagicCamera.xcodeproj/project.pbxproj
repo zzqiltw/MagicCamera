@@ -16,6 +16,7 @@
 		9917EBD61E68344D0047618B /* MCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBD51E68344D0047618B /* MCMainViewController.m */; };
 		9917EBDC1E6840710047618B /* MCActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBDB1E6840710047618B /* MCActionButton.m */; };
 		9917EBE01E684C9E0047618B /* MCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9917EBDF1E684C9E0047618B /* MCMessage.m */; };
+		99A96E5B1E9B245A00A33F15 /* UIImage+MC.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A96E5A1E9B245A00A33F15 /* UIImage+MC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		9917EBDD1E684C470047618B /* MCDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCDefine.h; sourceTree = "<group>"; };
 		9917EBDE1E684C9E0047618B /* MCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMessage.h; sourceTree = "<group>"; };
 		9917EBDF1E684C9E0047618B /* MCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMessage.m; sourceTree = "<group>"; };
+		99A96E591E9B245A00A33F15 /* UIImage+MC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MC.h"; sourceTree = "<group>"; };
+		99A96E5A1E9B245A00A33F15 /* UIImage+MC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MC.m"; sourceTree = "<group>"; };
 		E08B587B55C39EF3225A4D6B /* Pods-MagicCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagicCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-MagicCamera/Pods-MagicCamera.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +131,7 @@
 		9917EBA01E6832700047618B /* MagicCamera */ = {
 			isa = PBXGroup;
 			children = (
+				995431C21E6967D300E47F16 /* Libs */,
 				9917EBE31E684E2B0047618B /* Other */,
 				9917EBE21E684E220047618B /* Controller */,
 				9917EBE11E684E1C0047618B /* View */,
@@ -192,6 +196,23 @@
 				9917EBDD1E684C470047618B /* MCDefine.h */,
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		995431C21E6967D300E47F16 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				995431C31E6967DF00E47F16 /* Category */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		995431C31E6967DF00E47F16 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				99A96E591E9B245A00A33F15 /* UIImage+MC.h */,
+				99A96E5A1E9B245A00A33F15 /* UIImage+MC.m */,
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9917EBE01E684C9E0047618B /* MCMessage.m in Sources */,
+				99A96E5B1E9B245A00A33F15 /* UIImage+MC.m in Sources */,
 				9917EBD61E68344D0047618B /* MCMainViewController.m in Sources */,
 				9917EBA61E6832700047618B /* AppDelegate.m in Sources */,
 				9917EBA31E6832700047618B /* main.m in Sources */,
