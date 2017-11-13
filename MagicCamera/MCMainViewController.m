@@ -47,7 +47,9 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 /**
  *  预览图层
  */
-//@property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
+
+@property (nonatomic, strong) UIView *previewContainerView;
 
 @end
 
@@ -65,6 +67,15 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     [self selectImageButton];
     [self takePictureButton];
     [self backgroundImageView];
+    
+    self.previewContainerView = ({
+        UIView *view = [UIView new];
+        view.backgroundColor = [UIColor clearColor];
+        [self.backgroundImageView addSubview:view];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPan:)];
+        [view addGestureRecognizer:pan];
+        view;
+    });
     
     [self initAVCaptureSession];
 }
@@ -96,6 +107,14 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
 }
 
 #pragma mark - Actions
+- (void)onPan:(UIPanGestureRecognizer *)panGesture
+{
+    CGPoint translation = [panGesture translationInView:panGesture.view];
+    CGPoint center = panGesture.view.center;
+    panGesture.view.center = CGPointMake(center.x + translation.x, center.y + translation.y);
+    [panGesture setTranslation:CGPointZero inView:panGesture.view];
+}
+
 - (void)onSelectButtonClicked:(UIButton *)sender
 {
     UIAlertAction *blackColorAction = [UIAlertAction actionWithTitle:@"纯黑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -179,6 +198,15 @@ static NSString * const kMCBackgroundImageStoreKey = @"kMCBackgroundImageStoreKe
     self.selectImageButton.frame = (CGRect){{0, 0}, {kMainScreenWidth, kMainScreenHeight * 0.5}};
     self.takePictureButton.frame = (CGRect){{0, CGRectGetMaxY(self.selectImageButton.frame)}, {kMainScreenWidth, self.selectImageButton.frame.size.height}};
     self.backgroundImageView.frame = self.view.bounds;
+    
+    self.previewContainerView.frame = CGRectMake(50, 50, 50, 50);
+    
+    //初始化预览图层
+    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer.frame = CGRectMake(0, 0, 50, 50);
+    self.previewContainerView.layer.masksToBounds = YES;
+    [self.previewContainerView.layer addSublayer:self.previewLayer];
 }
 
 - (void)initAVCaptureSession {
